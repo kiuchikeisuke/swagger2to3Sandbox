@@ -1,0 +1,63 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: 端末管理さんAPI
+paths:
+  /exec:
+    post:
+      summary: update
+      description: update
+      operationId: update
+      responses:
+        '200':
+          description: result message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageEntity'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceEntity'
+        required: true
+    get:
+      summary: getList
+      operationId: getList
+      responses:
+        '200':
+          description: result list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceEntity'
+servers:
+  - url: 'https://virtserver.swaggerhub.com/kiuchikeisuke/DeviceKanriSan/1.0.0'
+components:
+  schemas:
+    MessageEntity:
+      type: object
+      properties:
+        message:
+          type: string
+    DeviceEntity:
+      type: object
+      properties:
+        userName:
+          type: string
+        mailAddress:
+          type: string
+        deviceName:
+          type: string
+        deviceId:
+          type: string
+        returnDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+            - using
+            - free
